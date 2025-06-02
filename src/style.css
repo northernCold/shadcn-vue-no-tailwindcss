@@ -1,0 +1,71 @@
+* {
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0;
+}
+
+:root {
+  --primary: oklch(0.21 0.034 264.665);
+  --primary-foreground: oklch(0.985 0.002 247.839);
+  --primary-90: color-mix(in oklab, var(--primary) 90%, transparent);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-90: color-mix(in oklab, var(--destructive) 90%, transparent);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --secondary-80: color-mix(in oklab, var(--secondary) 80%, transparent);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+}
+
+@keyframes enter {
+  0% {
+    --enter-opacity: initial;
+    --enter-scale: initial;
+    --enter-rotate: initial;
+    --enter-translate-x: initial;
+    --enter-translate-y: initial;
+
+    opacity: var(--enter-opacity, 1);
+    transform: translate3d(
+        var(--enter-translate-x, 0),
+        var(--enter-translate-y, 0),
+        0
+      )
+      scale3d(
+        var(--enter-scale, 1),
+        var(--enter-scale, 1),
+        var(--enter-scale, 1)
+      )
+      rotate(var(--enter-rotate, 0));
+  }
+}
+
+@keyframes exit {
+  to {
+    --tw-exit-opacity: initial;
+    --tw-exit-scale: initial;
+    --tw-exit-rotate: initial;
+    --tw-exit-translate-x: initial;
+    --tw-exit-translate-y: initial
+
+    opacity: var(--exit-opacity, 1);
+    transform: translate3d(
+        var(--exit-translate-x, 0),
+        var(--exit-translate-y, 0),
+        0
+      )
+      scale3d(var(--exit-scale, 1), var(--exit-scale, 1), var(--exit-scale, 1))
+      rotate(var(--exit-rotate, 0));
+  }
+}
