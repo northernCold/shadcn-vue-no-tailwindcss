@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { useFloating, offset, flip, shift } from "@floating-ui/vue";
 import { AnimatePresence, motion } from "motion-v";
 
@@ -19,17 +19,34 @@ const handlePointerenter = () => {
   open.value = true;
 };
 
-const handlePointerleave = () => {
+const handlePointerleave = (event) => {
+  // 检查鼠标是否移动到floating元素
+  if (event.relatedTarget && floating.value?.contains(event.relatedTarget)) {
+    return;
+  }
   open.value = false;
 };
+
+const handleFloatingPointerenter = () => {
+  open.value = true;
+};
+
+const handleFloatingPointerleave = (event) => {
+  // 检查鼠标是否移动到reference元素
+  if (event.relatedTarget && reference.value?.contains(event.relatedTarget)) {
+    return;
+  }
+  open.value = false;
+};
+
 </script>
 
 <template>
   <button
     ref="reference"
     @click="toggle"
-    @pointerleave="handlePointerleave"
     @pointerenter="handlePointerenter"
+    @pointerleave="handlePointerleave"
   >
     Button
   </button>
@@ -39,6 +56,8 @@ const handlePointerleave = () => {
       ref="floating"
       class="ui-popover-content"
       :style="floatingStyles"
+      @pointerenter="handleFloatingPointerenter"
+      @pointerleave="handleFloatingPointerleave"
     >
       <motion.div
         :initial="{ opacity: 0, scale: 0.95 }"
@@ -51,10 +70,12 @@ const handlePointerleave = () => {
     </div>
   </AnimatePresence>
 </template>
+
 <style lang="scss" scoped>
 .ui-popover {
   &-content {
-
+    padding-top: 20px;
+    top: -20px !important;
     &-inner {
       padding: 10px;
       border-radius: 12px;
@@ -62,4 +83,4 @@ const handlePointerleave = () => {
     }
   }
 }
-</style>
+</style>  
